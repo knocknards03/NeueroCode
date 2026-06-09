@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroCode: Interactive ML Coding Lab</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR: LEVEL CHOOSE -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-kicker">NEUROCODE ENGINE</span>
+        <h1 class="brand-title">ML Sandbox</h1>
+      </div>
+      
+      <ul class="levels-list" id="levels-list">
+        <!-- Loaded dynamically from JS -->
+      </ul>
+    </aside>
+    
+    <!-- MAIN WORKSPACE GRIDS -->
+    <main class="workspace">
+      
+      <!-- COLUMN 1: LESSON GUIDE & OBJECTIVES -->
+      <section class="workspace-col lesson-col">
+        <div class="col-header">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Theory &amp; Lesson</span>
+        </div>
+        <div class="col-body">
+          <h2 class="lesson-title" id="lesson-title">Level 1: The Linear Predictor</h2>
+          <div id="lesson-theory">
+            <!-- Loaded dynamically -->
+          </div>
+          
+          <div class="task-box">
+            <span class="task-box-title">
+              <i class="fas fa-terminal"></i>
+              Coding Assignment
+            </span>
+            <p class="task-box-text" id="task-text">
+              Loading...
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- COLUMN 2: CODE EDITOR & CONSOLE -->
+      <section class="workspace-col editor-col">
+        <div class="col-header">
+          <i class="fas fa-code"></i>
+          <span>Workspace Editor</span>
+        </div>
+        
+        <!-- Editor Textarea -->
+        <div class="editor-wrapper">
+          <div class="editor-header">
+            <span class="editor-lbl">source.js</span>
+            <span class="mono" style="font-size: 0.7rem; color: var(--text-dim)">JS Standard Context</span>
+          </div>
+          <textarea class="editor-textarea" id="editor-textarea" spellcheck="false" autocomplete="off"></textarea>
+          
+          <div class="editor-controls">
+            <button class="btn btn-primary" id="run-btn">
+              Run Code <i class="fas fa-play"></i>
+            </button>
+            <button class="btn btn-secondary" id="reset-btn" title="Reset to Starter Template">
+              Reset <i class="fas fa-undo-alt"></i>
+            </button>
+            <button class="btn btn-secondary" id="hint-btn" title="Get Coding Hint">
+              Hint <i class="fas fa-lightbulb"></i>
+            </button>
+            <button class="btn btn-secondary" id="solution-btn" title="Reveal Answer Solution" style="margin-left:auto;">
+              Reveal Answer <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Terminal Output Console -->
+        <div class="console-wrapper">
+          <div class="console-header">
+            <span class="console-title">
+              <i class="fas fa-chevron-right"></i>
+              <span>bash - neuroconsole</span>
+            </span>
+            <span class="mono" style="font-size: 0.65rem; color: var(--text-dark)">stdout</span>
+          </div>
+          <div class="console-body" id="console-body">
+            <!-- Console Logs Output -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- COLUMN 3: LIVE VISUALIZER CANVAS -->
+      <section class="workspace-col visual-col">
+        <div class="col-header">
+          <i class="fas fa-chart-line"></i>
+          <span>Live Visualizer</span>
+        </div>
+        <div class="col-body" style="display: flex; flex-direction: column;">
+          
+          <!-- Canvas Graph Screen -->
+          <div class="canvas-container">
+            <div class="canvas-overlay">Active Output</div>
+            <canvas id="visualizer-canvas"></canvas>
+          </div>
+          
+          <!-- Interactive Sliders parameters -->
+          <div class="param-sliders" id="param-sliders">
+            <!-- Rendered dynamically -->
+          </div>
+          
+          <!-- Completed Level Banner -->
+          <div class="success-splash" id="success-splash">
+            <h4>Level Passed! 🎉</h4>
+            <p>Your mathematical formula is functionally correct and unit test assertions passed.</p>
+            <button class="btn btn-success" id="next-level-btn">
+              Next Level <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+
+  <!-- Script Modules -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

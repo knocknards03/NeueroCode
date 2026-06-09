@@ -1,0 +1,8 @@
+{
+  "name": "ml-coding-sandbox",
+  "version": "1.0.0",
+  "description": "NeuroCode: Interactive Machine Learning Coding Lab",
+  "scripts": {
+    "dev": "python3 -m http.server 8000"
+  }
+}

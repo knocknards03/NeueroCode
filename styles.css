@@ -1,0 +1,604 @@
+/* NeuroCode: Interactive ML Coding Lab — Premium Stylesheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #050811;
+  --bg-darker: #020409;
+  --panel: rgba(13, 20, 38, 0.7);
+  --panel-solid: #0d1426;
+  --panel-light: rgba(22, 33, 62, 0.85);
+  
+  --border: rgba(0, 240, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.1);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-dark: #475569;
+
+  /* Neon Glow Accents */
+  --cyan: #00f0ff;
+  --cyan-glow: rgba(0, 240, 255, 0.35);
+  --cyan-transparent: rgba(0, 240, 255, 0.08);
+  
+  --purple: #bd5eff;
+  --purple-glow: rgba(189, 94, 255, 0.35);
+  --purple-transparent: rgba(189, 94, 255, 0.08);
+
+  --green: #39e08b;
+  --green-glow: rgba(57, 224, 139, 0.35);
+  --green-transparent: rgba(57, 224, 139, 0.08);
+
+  --coral: #ef4444;
+  --coral-glow: rgba(239, 68, 68, 0.35);
+  --amber: #ff9f3b;
+  
+  --r-large: 18px;
+  --r-medium: 12px;
+  --r-small: 6px;
+
+  --shadow-neon-cyan: 0 0 20px -3px var(--cyan-glow);
+  --shadow-neon-purple: 0 0 20px -3px var(--purple-glow);
+  --shadow-neon-green: 0 0 20px -3px var(--green-glow);
+  
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(189, 94, 255, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 240, 255, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(57, 224, 139, 0.06) 0px, transparent 50%);
+  color: var(--text);
+  font-family: 'Sora', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.015;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+code, .mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* ---------- WORKSPACE LAYOUT ---------- */
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Sidebar Levels Selector */
+aside.sidebar {
+  width: 250px;
+  background: var(--bg-darker);
+  border-right: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px 16px;
+  flex-shrink: 0;
+}
+
+.brand {
+  margin-bottom: 28px;
+  padding: 0 8px;
+}
+
+.brand-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--purple);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-top: 4px;
+}
+
+.levels-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.level-item {
+  width: 100%;
+}
+
+.level-btn {
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-medium);
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.level-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+}
+
+.level-btn.active {
+  background: var(--cyan-transparent);
+  border-color: rgba(0, 240, 255, 0.25);
+  color: var(--cyan);
+  font-weight: 600;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.level-btn.completed {
+  border-color: rgba(57, 224, 139, 0.25);
+}
+
+.status-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--text-dark);
+  color: var(--text-dim);
+}
+
+.level-btn.active .status-badge {
+  background: var(--cyan);
+  color: var(--bg-darker);
+  font-weight: 700;
+}
+
+.level-btn.completed .status-badge {
+  background: var(--green);
+  color: var(--bg-darker);
+  font-weight: 700;
+}
+
+/* Workspace Main Columns */
+main.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 360px 1fr 340px;
+  height: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+  main.workspace {
+    grid-template-columns: 320px 1fr;
+  }
+  .visual-col {
+    display: none; /* Hide visualizer sidebar or stack it */
+  }
+}
+
+.workspace-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--border-strong);
+}
+
+.workspace-col:last-child {
+  border-right: none;
+}
+
+/* Col Headers */
+.col-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-strong);
+  background: rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.col-header i {
+  color: var(--cyan);
+}
+
+.col-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* ---------- LESSON GUIDE PANEL ---------- */
+.lesson-col {
+  background: rgba(13, 20, 38, 0.25);
+}
+
+.lesson-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.math-block {
+  background: var(--panel-light);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-medium);
+  padding: 14px;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--cyan);
+  margin: 16px 0;
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.lesson-col p {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.lesson-col ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.lesson-col li {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.lesson-col li strong {
+  color: #fff;
+}
+
+.task-box {
+  background: var(--purple-transparent);
+  border: 1px dashed var(--purple);
+  border-radius: var(--r-medium);
+  padding: 18px;
+  margin-top: 24px;
+}
+
+.task-box-title {
+  font-size: 0.8rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-box-text {
+  font-size: 0.88rem;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* ---------- CODE EDITOR PANEL ---------- */
+.editor-col {
+  background: var(--bg);
+}
+
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1.3;
+  min-height: 250px;
+  position: relative;
+  border-bottom: 1px solid var(--border-strong);
+  overflow: hidden;
+}
+
+.editor-header {
+  padding: 10px 20px;
+  background: var(--bg-darker);
+  border-bottom: 1px solid var(--border-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.editor-textarea {
+  flex: 1;
+  width: 100%;
+  background: #02050b;
+  border: none;
+  color: #a5f3fc; /* Soft Cyan */
+  font-family: 'Space Mono', monospace;
+  font-size: 0.92rem;
+  padding: 20px;
+  resize: none;
+  outline: none;
+  line-height: 1.6;
+}
+
+.editor-controls {
+  padding: 14px 20px;
+  background: var(--bg-darker);
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn {
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--r-small);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--cyan);
+  border: 1px solid var(--cyan);
+  color: var(--bg-darker);
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 25px var(--cyan-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-dim);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.btn-success {
+  background: var(--green);
+  border: 1px solid var(--green);
+  color: var(--bg-darker);
+  box-shadow: var(--shadow-neon-green);
+}
+
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 25px var(--green-glow);
+}
+
+/* Console Output Logger */
+.console-wrapper {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  background: #010204;
+  overflow: hidden;
+  min-height: 150px;
+}
+
+.console-header {
+  padding: 8px 20px;
+  background: #090c15;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.console-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.console-title i {
+  color: var(--green);
+}
+
+.console-body {
+  flex: 1;
+  padding: 16px 20px;
+  overflow-y: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.console-line {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.console-line.info { color: var(--text-dim); }
+.console-line.success { color: var(--green); }
+.console-line.error { color: var(--coral); }
+.console-line.warn { color: var(--amber); }
+
+/* ---------- VISUALIZER PANEL ---------- */
+.visual-col {
+  background: var(--panel-solid);
+}
+
+.canvas-container {
+  width: 100%;
+  height: 250px;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-medium);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.canvas-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--green);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.param-sliders {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-medium);
+  padding: 16px;
+}
+
+.param-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  padding-bottom: 6px;
+}
+
+.slider-group {
+  margin-bottom: 12px;
+}
+
+.slider-group:last-child {
+  margin-bottom: 0;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.slider-labels span span {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.slider-input {
+  width: 100%;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  height: 4px;
+  border-radius: 99px;
+  outline: none;
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cyan);
+  cursor: pointer;
+  box-shadow: var(--shadow-neon-cyan);
+  transition: var(--transition);
+}
+
+.slider-input::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.success-splash {
+  background: var(--green-transparent);
+  border: 1px solid var(--green);
+  border-radius: var(--r-medium);
+  padding: 16px;
+  margin-top: 20px;
+  text-align: center;
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
+}
+
+.success-splash h4 {
+  color: var(--green);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.success-splash p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
